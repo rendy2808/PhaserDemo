@@ -1,15 +1,37 @@
 var demo = {};
+var centerX = 1500/2;
+var centerY = 1000/2;
+var batman;
 demo.state0 = function(){};
 demo.state0.prototype = {
-    preload:function(){},
+    preload:function(){
+        game.load.image('batman','assets/sprites/batman.png');
+    },
     create:function(){
         game.stage.backgroundColor = '#80ff80';
         console.log('state0');
         
         addChangeStateEventListener();
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        
+        batman = game.add.sprite(centerX,centerY,'batman');
+        batman.anchor.setTo(0.5 , 0.5);
     },
-    update:function(){}     
+    update:function(){
+        if(game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+            batman.x += 4;
+        }
+        else if(game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
+            batman.x -= 4;
+        }
+        if(game.input.keyboard.isDown(Phaser.Keyboard.UP)){
+            batman.y -= 4;
+        }
+        else if(game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
+            batman.y += 4;
+    
+        }
+    }
 };
 
 function changeState(i , stateNum){
